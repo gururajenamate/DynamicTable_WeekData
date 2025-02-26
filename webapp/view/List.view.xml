@@ -1,0 +1,59 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core"
+    controllerName="weeklydata.controller.List">
+    
+    <VBox>
+        <!-- Filter Bar -->
+        <fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search=".onFilterChange" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+            <fb:filterGroupItems>
+                <fb:FilterGroupItem name="SelectWeek" label="Select Week" groupName="Group1" visibleInFilterBar="true">
+                    <fb:control>
+                        <ComboBox id="idWeekSelect">
+                            <!-- Week options will be set dynamically in the controller -->
+                        </ComboBox>
+                    </fb:control>
+                </fb:FilterGroupItem>
+                <fb:FilterGroupItem name="OffsetFrom" label="Offset From" groupName="Group1" visibleInFilterBar="true">
+                    <fb:control>
+                        <ComboBox id="idOffsetFrom" >
+                            <items>
+                                <core:Item key="0" text="0"/>
+                                <core:Item key="1" text="1"/>
+                                <core:Item key="2" text="2"/>
+                                <core:Item key="3" text="3"/>
+                                <core:Item key="4" text="4"/>
+                                <core:Item key="5" text="5"/>
+                            </items>
+                        </ComboBox>
+                    </fb:control>
+                </fb:FilterGroupItem>
+                <fb:FilterGroupItem name="OffsetTo" label="Offset To" groupName="Group1" visibleInFilterBar="true">
+                    <fb:control>
+                        <ComboBox id="idOffsetTo">
+                            <items>
+                                <core:Item key="0" text="0"/>
+                                <core:Item key="1" text="1"/>
+                                <core:Item key="2" text="2"/>
+                                <core:Item key="3" text="3"/>
+                                <core:Item key="4" text="4"/>
+                                <core:Item key="5" text="5"/>
+                            </items>
+                        </ComboBox>
+                    </fb:control>
+                </fb:FilterGroupItem>
+            </fb:filterGroupItems>
+        </fb:FilterBar>
+
+        <!-- Dynamic Table -->
+        <Table id="idDynamicTable" growing="true" growingMode="Scroll">
+            <headerToolbar>
+                <Toolbar>
+                    <Title text="Dynamic Table (Filtered Weeks)"/>
+                </Toolbar>
+            </headerToolbar>
+        </Table>
+    </VBox>
+</mvc:View>
