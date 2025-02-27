@@ -77,7 +77,8 @@ sap.ui.define([
             // Add dynamic columns for each selected week
             aWeeks.forEach(function (week) {
                 oTable.addColumn(new sap.m.Column({
-                    header: new sap.m.Label({ text: week.week })
+                    header: new sap.m.Label({ text: week.week }),
+                    hAlign: "Center"
                 }));
             });
 
@@ -90,7 +91,10 @@ sap.ui.define([
             aMaterialData.forEach(function (employee) {
                 var weekData = [];
                 for (var i = iStartWeek; i <= iEndWeek; i++) {
-                    weekData.push(Math.floor(Math.random() * 10)); // Random values
+                    weekData.push({
+                        Quantity: Math.floor(Math.random() * 10),
+                        Source:Math.floor(Math.random() * 4) + 1
+                    } ); // Random values
                 }
                 employee.weekData = weekData;
             });
@@ -106,7 +110,12 @@ sap.ui.define([
                         new sap.m.Text({ text: "{materialModel>Material}" }),
                         new sap.m.Text({ text: "{materialModel>Plant}" }) 
                     ].concat(aWeeks.map((week, index) => 
-                        new sap.m.Text({ text: "{materialModel>weekData/" + index + "}" })
+                        new sap.m.ObjectStatus({ text: "{materialModel>weekData/" + index + "/Quantity}",
+                            inverted: true,
+                            state: "{= ${materialModel>weekData/" + index + "/Source} === 1 ? 'Success' : "
+                                        +" ${materialModel>weekData/" + index + "/Source} === 2 ? 'Error' :"
+                                        +" ${materialModel>weekData/" + index + "/Source} === 3 ? 'Warning' : 'Information'}"
+                         })
                     ))
                 })
             });
